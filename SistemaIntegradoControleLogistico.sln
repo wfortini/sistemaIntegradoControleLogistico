@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuloControleColeta", "ModuloControleColeta\ModuloControleColeta.csproj", "{D1BC3941-9D60-48AD-83B9-C0E5093FE509}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuloControleFrete", "ModuloControleFrete\ModuloControleFrete.csproj", "{30B10D45-E97B-455E-98B8-2555798D5CCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleControleLogistica", "ModuleControleLogistica\ModuleControleLogistica.csproj", "{0D3E94EC-B6EB-4543-AAB7-3D7E05633731}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D1BC3941-9D60-48AD-83B9-C0E5093FE509}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1BC3941-9D60-48AD-83B9-C0E5093FE509}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1BC3941-9D60-48AD-83B9-C0E5093FE509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30B10D45-E97B-455E-98B8-2555798D5CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B10D45-E97B-455E-98B8-2555798D5CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B10D45-E97B-455E-98B8-2555798D5CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B10D45-E97B-455E-98B8-2555798D5CCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D3E94EC-B6EB-4543-AAB7-3D7E05633731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D3E94EC-B6EB-4543-AAB7-3D7E05633731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D3E94EC-B6EB-4543-AAB7-3D7E05633731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D3E94EC-B6EB-4543-AAB7-3D7E05633731}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
