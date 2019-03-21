@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ModuloControleColeta.Data;
+using ModuloControleColeta.Services;
 
 namespace ModuloControleColeta
 {
@@ -36,6 +37,7 @@ namespace ModuloControleColeta
             services.AddDbContext<DBContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddTransient<ISolicitacaoService, SolicitacaoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
