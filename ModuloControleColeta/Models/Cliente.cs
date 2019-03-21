@@ -18,10 +18,10 @@ namespace ModuloControleColeta.Models
 
         [Required]
         [EmailAddress]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [Required]
-        public string teleone { get; set;  }
+        public string Teleone { get; set;  }
         
     }
 }
