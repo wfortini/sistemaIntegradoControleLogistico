@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ModuloControleColeta.Data;
 
 namespace ModuloControleColeta.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20190322173943_insertUsuario")]
+    partial class insertUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +35,6 @@ namespace ModuloControleColeta.Migrations
 
                     b.Property<string>("Observacao");
 
-                    b.Property<int?>("ParceiroId");
-
                     b.Property<string>("ProdutoId")
                         .IsRequired();
 
@@ -51,8 +51,6 @@ namespace ModuloControleColeta.Migrations
                     b.HasIndex("DestinoId");
 
                     b.HasIndex("FreteId");
-
-                    b.HasIndex("ParceiroId");
 
                     b.HasIndex("ProdutoId");
 
@@ -172,10 +170,6 @@ namespace ModuloControleColeta.Migrations
                     b.HasOne("ModuloControleColeta.Models.Frete", "Frete")
                         .WithMany()
                         .HasForeignKey("FreteId");
-
-                    b.HasOne("ModuloControleColeta.Models.Usuario", "Parceiro")
-                        .WithMany()
-                        .HasForeignKey("ParceiroId");
 
                     b.HasOne("ModuloControleColeta.Models.Produto", "Produto")
                         .WithMany()

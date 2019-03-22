@@ -20,5 +20,6 @@ namespace ModuloControleColeta.Data
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Frete> Frete { get; set; }
+        public DbSet<Usuario> Usuario { get; set;  }
     }
 }

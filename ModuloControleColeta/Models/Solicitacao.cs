@@ -24,5 +24,7 @@ namespace ModuleControleColeta.Models
         public Cliente ClienteSolicitante { get; set; }
         public Frete Frete { get; set; }
 
+        public Usuario Parceiro { get; set; }
+
     }
 }
