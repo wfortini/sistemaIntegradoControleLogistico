@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ModuloControleColeta.Data;
 using ModuloControleColeta.Models;
 
 namespace ModuloControleColeta.Services
 {
+    
     public class UsuarioService : IUsuarioService
     {
         private readonly DBContext _context;
@@ -51,6 +54,11 @@ namespace ModuloControleColeta.Services
             _context.SaveChanges();
 
             return usuario;
+        }
+
+        public Usuario GetById(int id)
+        {
+            return _context.Usuario.Find(id);
         }
 
 

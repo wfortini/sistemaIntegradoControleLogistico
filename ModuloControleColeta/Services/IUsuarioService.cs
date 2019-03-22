@@ -10,5 +10,7 @@ namespace ModuloControleColeta.Services
     {
         Usuario Registrar(Usuario usuario, string password);
         Usuario Autenticar(string login, string password);
+        Usuario GetById(int id);
+       
     }
 }
