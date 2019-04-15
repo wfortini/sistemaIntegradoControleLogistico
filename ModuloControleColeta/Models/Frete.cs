@@ -9,5 +9,7 @@ namespace ModuloControleColeta.Models
     {
         public string Id { get; set; }
         public decimal valor { get; set; }
+        public int prazoEntregaDias { get; set; }
+        public DateTime dataPrevista { get; set; }
     }
 }

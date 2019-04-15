@@ -34,6 +34,9 @@ namespace ModuloControleColeta.Services
 
         public Solicitacao CriarSolicitacao(Solicitacao solicitacao)
         {
+
+             // preencher as dadas de entrega
+
             _context.Solicitacao.Add(solicitacao);
             _context.SaveChanges();
             return solicitacao;

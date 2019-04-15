@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using ModuloControleColeta.Models;
 using ModuloControleColeta.Services;
 
@@ -27,8 +31,34 @@ namespace ModuloControleColeta.Controllers
         [HttpPost("autenticar")]
         public IActionResult Autenticar([FromBody]UsuarioDTO usuarioDTO)
         {
+            var usuario = _usuarioServicerService.Autenticar(usuarioDTO.Login, usuarioDTO.Password);
 
-            return null;
+            if (usuario == null)
+                return BadRequest(new { message = "Login ou passwod incorretos" });
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, usuario.Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            // return basic user info (without password) and token to store client side
+            return Ok(new
+            {
+                Id = usuario.Id,
+                Login = usuario.Login,
+                RazaoSocial = usuario.RazaoSocial,
+                nomeFantasia = usuario.NomeFantasia,
+                Token = tokenString
+            });
         }
 
         [AllowAnonymous]

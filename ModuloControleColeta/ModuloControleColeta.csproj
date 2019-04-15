@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>fab11287-35f1-4988-b354-d642b23e0a5b</UserSecretsId>
   </PropertyGroup>
 
 
@@ -11,6 +12,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModuleControleLogistica\ModuleControleLogistica.csproj" />
+    <ProjectReference Include="..\ModuloControleFrete\ModuloControleFrete.csproj" />
   </ItemGroup>
 
 </Project>

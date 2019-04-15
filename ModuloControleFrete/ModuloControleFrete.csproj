@@ -22,13 +22,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Controller\" />
     <Folder Include="Services\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\ModuloControleColeta\ModuloControleColeta.csproj" />
   </ItemGroup>
 
 </Project>

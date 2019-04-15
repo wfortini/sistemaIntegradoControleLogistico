@@ -1,14 +1,11 @@
 ﻿{
   "ProviderId": "Microsoft.VisualStudio.ConnectedService.Wcf",
   "Version": "15.0.20628.921",
-  "GettingStartedDocument": {
-    "Uri": "https://go.microsoft.com/fwlink/?linkid=858517"
-  },
   "ExtendedData": {
     "Uri": "http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL",
-    "Namespace": "Correios",
+    "Namespace": "ServiceReference1",
     "SelectedAccessLevelForGeneratedClass": "Public",
-    "GenerateMessageContract": false,
+    "GenerateMessageContract": true,
     "ReuseTypesinReferencedAssemblies": true,
     "ReuseTypesinAllReferencedAssemblies": true,
     "CollectionTypeReference": {
@@ -21,7 +18,7 @@
     },
     "CheckedReferencedAssemblies": [],
     "InstanceId": null,
-    "Name": "Correios",
+    "Name": "ServiceReference1",
     "Metadata": {}
   }
 }
