@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 using Correios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ModuloControleFrete.Services;
 using static Correios.CalcPrecoPrazoWSSoapClient;
 
 namespace ModuloControleFrete.Controller
 {
+
+    
+
     [Route("api/[controller]")]
     [ApiController]
     public class FreteController : ControllerBase
@@ -16,9 +20,7 @@ namespace ModuloControleFrete.Controller
         public IActionResult post()
         {
 
-            CalcPrecoPrazoWSSoapClient correios = new CalcPrecoPrazoWSSoapClient(EndpointConfiguration.CalcPrecoPrazoWSSoap);
-
-            correios.CalcPrecoPrazoAsync()
+            IFreteService service = new FreteService();             
 
             return null;
         }
