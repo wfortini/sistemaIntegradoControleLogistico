@@ -25,7 +25,7 @@ namespace ModuloControleColeta.Models
         public string sCepOrigem { get; set; }
         public string sCepDestino { get; set; }
         public string nVlPeso { get; set; }
-        public int nCdFormato { get; set; }
+        public int nCdFormato { get; set; } // 1 caixa
         public decimal nVlComprimento { get; set; }
         public decimal nVlAltura { get; set; }
 

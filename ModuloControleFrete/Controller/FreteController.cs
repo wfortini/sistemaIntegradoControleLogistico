@@ -18,6 +18,8 @@ namespace ModuloControleFrete.Controller
 
             CalcPrecoPrazoWSSoapClient correios = new CalcPrecoPrazoWSSoapClient(EndpointConfiguration.CalcPrecoPrazoWSSoap);
 
+            correios.CalcPrecoPrazoAsync()
+
             return null;
         }
     }

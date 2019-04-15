@@ -7,6 +7,6 @@ namespace ModuloControleFrete.Services
 {
     public interface IFreteService
     {
-
+        public async Task<Frete> GetFreteAsync()
     }
 }
