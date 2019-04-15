@@ -20,7 +20,9 @@ namespace ModuloControleFrete.Controller
         public IActionResult post()
         {
 
-            IFreteService service = new FreteService();             
+            IFreteService service = new FreteService();
+            
+
 
             return null;
         }
