@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ModuleControleColeta.Models;
 using ModuloControleColeta.Models;
 using ModuloControleColeta.Services;
+using ModuloControleFrete.Services;
 
 namespace ModuleControleColeta.Controllers
 {
@@ -17,27 +18,52 @@ namespace ModuleControleColeta.Controllers
     {
         private readonly ISolicitacaoService _service;
         private readonly IUsuarioService _usuarioService;
+        private readonly IFreteService _freteService;
 
-        public SolicitacaoController(ISolicitacaoService service, IUsuarioService usuario)
+        public SolicitacaoController(ISolicitacaoService service, IUsuarioService usuario, IFreteService sfrete)
         {
             _service = service;
             _usuarioService = usuario;
+            _freteService = sfrete;
         }    
 
-        // GET: api/Todo/5
+        // GET: api/solicitacao/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Solicitacao>> getSolicitacaoPorId(string id)
+        public async Task<ActionResult<ModuloControleFrete.Models.Frete>> getSolicitacaoPorId(string id)
         {
+            var produto = new ModuloControleFrete.Models.Produto
+            {
+                nCdEmpresa = String.Empty,
+                nCdFormato = 1,
+                nCdServico = "41106",
+                Descricao = "teste",
+                nVlAltura = new decimal(20.60),
+                nVlComprimento = new decimal(35.00),
+                nVlDiametro = new decimal(50.00),
+                nVlPeso = "20",
+                nVlLargura = new decimal(40.00),
+                nVlValorDeclarado = new decimal(2000),
+                sCdAvisoRecebimento = "N",
+                sCdMaoPropria = "N",
+                sCepDestino = "20261050",
+                sCepOrigem = "04180112",
+                sDsSenha = String.Empty
+
+
+
+            };
+
+            ModuloControleFrete.Models.Frete frete = await _freteService.GetFreteAsyncc(produto);
             
 
-            var solic =  _service.BuscarSolicitacaoPorId(id);
+            //var solic =  _service.BuscarSolicitacaoPorId(id);
 
-            if(solic == null)
-            {
-                return NotFound();
-            }
+           // if(solic == null)
+            ////{
+            //    return NotFound();
+           // }
 
-            return solic;
+            return frete;
         }
 
         [HttpPost]

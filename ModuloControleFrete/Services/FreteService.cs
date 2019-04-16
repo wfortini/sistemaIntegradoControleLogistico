@@ -13,6 +13,8 @@ namespace ModuloControleFrete.Services
 
         public async Task<Frete> GetFreteAsyncc(Produto produto)
         {
+            //41106 pac
+            //40010
             CalcPrecoPrazoWSSoapClient correios = new CalcPrecoPrazoWSSoapClient(EndpointConfiguration.CalcPrecoPrazoWSSoap);
 
             Correios.cResultado resultado = await correios.CalcPrecoPrazoAsync(String.Empty, String.Empty, produto.nCdServico, produto.sCepOrigem, produto.sCepDestino,
@@ -23,7 +25,8 @@ namespace ModuloControleFrete.Services
 
             Frete frete = new Frete
             {
-
+               prazoEntregaDias =  int.Parse(servico.PrazoEntrega),
+               valor = decimal.Parse(servico.Valor),
             };
 
             return frete;

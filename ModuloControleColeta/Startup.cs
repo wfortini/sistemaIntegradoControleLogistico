@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using ModuloControleColeta.Data;
 using ModuloControleColeta.Models;
 using ModuloControleColeta.Services;
+using ModuloControleFrete.Services;
 
 namespace ModuloControleColeta
 {
@@ -42,6 +43,7 @@ namespace ModuloControleColeta
                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<ISolicitacaoService, SolicitacaoService>();
+            services.AddTransient<IFreteService, FreteService>();
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
