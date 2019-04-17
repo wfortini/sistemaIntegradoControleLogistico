@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModuleControleColeta.Models;
@@ -19,51 +20,44 @@ namespace ModuleControleColeta.Controllers
         private readonly ISolicitacaoService _service;
         private readonly IUsuarioService _usuarioService;
         private readonly IFreteService _freteService;
+        private readonly IMapper _mapper;
 
-        public SolicitacaoController(ISolicitacaoService service, IUsuarioService usuario, IFreteService sfrete)
+        public SolicitacaoController(ISolicitacaoService service, IUsuarioService usuario, IFreteService sfrete, IMapper mapper)
         {
             _service = service;
             _usuarioService = usuario;
             _freteService = sfrete;
-        }    
+            _mapper = mapper;
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost("simularFrete")]
+        public async Task<ActionResult<ModuloControleFrete.Models.Frete>> SimularFrete(ModuloControleFrete.Models.Produto produto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return await this.getFrete(produto);
+
+           
+        }
 
         // GET: api/solicitacao/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ModuloControleFrete.Models.Frete>> getSolicitacaoPorId(string id)
+        public async Task<ActionResult<Solicitacao>> getSolicitacaoPorId(string id)
         {
-            var produto = new ModuloControleFrete.Models.Produto
-            {
-                nCdEmpresa = String.Empty,
-                nCdFormato = 1,
-                nCdServico = "41106",
-                Descricao = "teste",
-                nVlAltura = new decimal(20.60),
-                nVlComprimento = new decimal(35.00),
-                nVlDiametro = new decimal(50.00),
-                nVlPeso = "20",
-                nVlLargura = new decimal(40.00),
-                nVlValorDeclarado = new decimal(2000),
-                sCdAvisoRecebimento = "N",
-                sCdMaoPropria = "N",
-                sCepDestino = "20261050",
-                sCepOrigem = "04180112",
-                sDsSenha = String.Empty
-
-
-
-            };
-
-            ModuloControleFrete.Models.Frete frete = await _freteService.GetFreteAsyncc(produto);
             
 
-            //var solic =  _service.BuscarSolicitacaoPorId(id);
+           var solic =  _service.BuscarSolicitacaoPorId(id);
 
-           // if(solic == null)
-            ////{
-            //    return NotFound();
-           // }
+            if(solic == null)
+           {
+           }
 
-            return frete;
+            return solic;
         }
 
         [HttpPost]
@@ -84,6 +78,13 @@ namespace ModuleControleColeta.Controllers
             }
 
             solicitacao.Parceiro = parceiro;
+
+            ModuloControleFrete.Models.Produto produto = _mapper.Map<ModuloControleFrete.Models.Produto>(solicitacao.Produto);
+            ModuloControleFrete.Models.Frete frete = await this.getFrete(produto);
+
+            solicitacao.Frete.dataPrevista = frete.dataPrevista;
+            solicitacao.Frete.prazoEntregaDias = frete.prazoEntregaDias;
+            solicitacao.Frete.valor = frete.valor;
 
             Solicitacao newSolicitacao = _service.CriarSolicitacao(solicitacao);
 
@@ -113,6 +114,35 @@ namespace ModuleControleColeta.Controllers
             _service.AtualizarSolicitacao(solicitacao);
 
             return NoContent();
+        }
+
+        private async Task<ModuloControleFrete.Models.Frete> getFrete(ModuloControleFrete.Models.Produto produto)
+        {
+
+            produto.nCdEmpresa = String.Empty;
+            produto.sCdAvisoRecebimento = "N";
+            produto.sDsSenha = String.Empty;
+            produto.nCdFormato = 1; // caixa
+            produto.nCdServico = "41106";
+
+            ModuloControleFrete.Models.Frete frete = await _freteService.GetFreteAsyncc(produto);
+
+            if (String.IsNullOrEmpty(frete.codeErro))
+            {
+                frete.dataPrevista = DateTime.Now;
+                frete.dataPrevista = frete.dataPrevista.AddDays(frete.prazoEntregaDias);
+                frete.codeErro = String.Empty;
+                frete.msgErro = String.Empty;
+                frete.Id = Guid.NewGuid().ToString();
+                return frete;
+            }
+            else
+            {
+
+
+                return frete;
+            }
+
         }
     }
 }

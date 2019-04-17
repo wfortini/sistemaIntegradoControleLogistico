@@ -23,11 +23,23 @@ namespace ModuloControleFrete.Services
 
             Correios.cServico servico = resultado.Servicos.FirstOrDefault();
 
-            Frete frete = new Frete
+            Frete frete = null;
+            if (servico != null && !String.IsNullOrEmpty(servico.Erro))
             {
-               prazoEntregaDias =  int.Parse(servico.PrazoEntrega),
-               valor = decimal.Parse(servico.Valor),
-            };
+                frete = new Frete
+                {
+                    prazoEntregaDias = int.Parse(servico.PrazoEntrega),
+                    valor = decimal.Parse(servico.Valor),
+                };
+            }
+            else
+            {
+                frete = new Frete
+                {
+                    codeErro = servico.Erro,
+                    msgErro = servico.MsgErro
+                };
+            }
 
             return frete;
 

@@ -11,5 +11,8 @@ namespace ModuloControleFrete.Models
         public decimal valor { get; set; }
         public int prazoEntregaDias { get; set; }
         public DateTime dataPrevista { get; set; }
+
+        public string codeErro { get; set; }
+        public string msgErro { get; set; }
     }
 }
