@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,8 +13,6 @@ namespace ModuloControleColeta.Models
         [Required]
         public string Descricao { get; set; }
 
-        
-        public string Peso { get; set; }
 
         [Required]
         public decimal valor { get; set; }
@@ -21,10 +20,12 @@ namespace ModuloControleColeta.Models
         [Required]
         public string Nome { get; set; }
 
-        
+        [JsonIgnore]
         public string nCdEmpresa { get; set; }
 
+        [JsonIgnore]
         public string sDsSenha { get; set; }
+        [JsonIgnore]
         public string nCdServico { get; set; }
 
         [Required]
@@ -35,6 +36,8 @@ namespace ModuloControleColeta.Models
 
         [Required]
         public string nVlPeso { get; set; }
+
+        [JsonIgnore]
         public int nCdFormato { get; set; } // 1 caixa
 
         [Required]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,8 +19,10 @@ namespace ModuloControleColeta.Models
 
         public string Login { get; set; }
 
+        [JsonIgnore]
         public byte[] PasswordHash { get; set; }
-        
+
+        [JsonIgnore]
         public byte[] PasswordSalt { get; set; }
     }
 }
