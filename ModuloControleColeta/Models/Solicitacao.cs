@@ -1,4 +1,5 @@
 ﻿using ModuloControleColeta.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,6 +23,8 @@ namespace ModuleControleColeta.Models
 
         [Required]
         public Cliente ClienteSolicitante { get; set; }
+
+        
         public Frete Frete { get; set; }
 
         public Usuario Parceiro { get; set; }

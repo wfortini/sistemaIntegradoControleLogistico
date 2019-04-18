@@ -82,6 +82,11 @@ namespace ModuleControleColeta.Controllers
             ModuloControleFrete.Models.Produto produto = _mapper.Map<ModuloControleFrete.Models.Produto>(solicitacao.Produto);
             ModuloControleFrete.Models.Frete frete = await this.getFrete(produto);
 
+            if(frete == null || !"0".Equals(frete.codeErro) )
+            {
+                return BadRequest(frete.msgErro);
+            }
+
             solicitacao.Frete.dataPrevista = frete.dataPrevista;
             solicitacao.Frete.prazoEntregaDias = frete.prazoEntregaDias;
             solicitacao.Frete.valor = frete.valor;
@@ -123,16 +128,14 @@ namespace ModuleControleColeta.Controllers
             produto.sCdAvisoRecebimento = "N";
             produto.sDsSenha = String.Empty;
             produto.nCdFormato = 1; // caixa
-            produto.nCdServico = "41106";
+            produto.nCdServico = "40010";
 
             ModuloControleFrete.Models.Frete frete = await _freteService.GetFreteAsyncc(produto);
 
-            if (String.IsNullOrEmpty(frete.codeErro))
+            if (frete != null && "0".Equals(frete.codeErro))
             {
                 frete.dataPrevista = DateTime.Now;
-                frete.dataPrevista = frete.dataPrevista.AddDays(frete.prazoEntregaDias);
-                frete.codeErro = String.Empty;
-                frete.msgErro = String.Empty;
+                frete.dataPrevista = frete.dataPrevista.AddDays(frete.prazoEntregaDias);               
                 frete.Id = Guid.NewGuid().ToString();
                 return frete;
             }

@@ -26,20 +26,27 @@ namespace ModuloControleFrete.Services
             Frete frete = null;
             if (servico != null && !String.IsNullOrEmpty(servico.Erro))
             {
-                frete = new Frete
+                if(String.IsNullOrEmpty(servico.Erro) || servico.Erro.Equals("0"))
                 {
-                    prazoEntregaDias = int.Parse(servico.PrazoEntrega),
-                    valor = decimal.Parse(servico.Valor),
-                };
-            }
-            else
-            {
-                frete = new Frete
+                    frete = new Frete
+                    {
+                        prazoEntregaDias = int.Parse(servico.PrazoEntrega),
+                        valor = decimal.Parse(servico.Valor),
+                        codeErro = servico.Erro,
+                        msgErro = servico.MsgErro
+                    };
+                }
+                else
                 {
-                    codeErro = servico.Erro,
-                    msgErro = servico.MsgErro
-                };
+                    frete = new Frete
+                    {
+                        codeErro = servico.Erro,
+                        msgErro = servico.MsgErro
+                    };
+                }
+                
             }
+            
 
             return frete;
 
